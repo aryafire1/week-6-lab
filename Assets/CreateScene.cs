@@ -8,6 +8,7 @@ public class CreateScene : MonoBehaviour
     public int stonesRequired;
     public GameObject[] trees;
     public GameObject[] stones;
+    float pyramidBase = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,28 +63,32 @@ public class CreateScene : MonoBehaviour
         Debug.Log("Create Pyramid");
 
         //floor 1 = 5 x 5
-        //y value
-        float shiftX = 5f;
-        float shiftY = 5f;
-        for(int i = 5; i >= 0; i--) {
 
-            //x value
+        float shiftX = 5f;
+        float shiftZ = 5f;
+        
+        //x value
+        
             for(int j = 5; j >=0; j--) {
                 //making object
                 GameObject stones = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                stones.transform.position = new Vector3(shiftX, 0, 0);
+                stones.transform.position = new Vector3(shiftX - 5, 0, 0);
                 
                 //moving down
                 shiftX--;
             }
-
-        //making object
-        stones.transform.position = new Vector3(0, 0, shiftY);
         
-        //moving down
-        shiftY--;
+        //z value
+            for(int i = 5; i >= 0; i--) {
+
+            //making object
+            GameObject stones2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            stones2.transform.position = new Vector3(0, 0, shiftZ - 5);
             
-        }
+            //moving down
+            shiftZ--;
+            }
+
 
    }
 }
