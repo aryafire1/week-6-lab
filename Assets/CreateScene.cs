@@ -8,7 +8,6 @@ public class CreateScene : MonoBehaviour
     public int stonesRequired;
     public GameObject[] trees;
     public GameObject[] stones;
-    float pyramidBase = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,10 @@ public class CreateScene : MonoBehaviour
         var cubeRenderer = ground.GetComponent<Renderer>();
         Color customColor = new Color(1f, 0f, 0f, 1.0f);
         cubeRenderer.material.SetColor("_Color", customColor);
+
+        //set child how the hell do i set child when the damn thing wont let me
+        /*GameObject groundParent = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        ground.transform.SetParent(groundParent, false);*/
    }
 
    void CreateRandomForest() {
@@ -64,30 +67,38 @@ public class CreateScene : MonoBehaviour
 
         //floor 1 = 5 x 5
 
-        float shiftX = 5f;
-        float shiftZ = 5f;
-        
-        //x value
-        
-            for(int j = 5; j >=0; j--) {
-                //making object
-                GameObject stones = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                stones.transform.position = new Vector3(shiftX - 5, 0, 0);
-                
-                //moving down
-                shiftX--;
-            }
-        
-        //z value
-            for(int i = 5; i >= 0; i--) {
+        //row making variables
+        float shiftX = 5;
+        float shiftZ = 5;
+        float shiftY = 5;
 
-            //making object
-            GameObject stones2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            stones2.transform.position = new Vector3(0, 0, shiftZ - 5);
+        //initializer variable
+        int n = 5;
+        
+        //y value
+        
+            for(int i = 0; i < n; i++) {
+
+                //x value
+                for(int j = 0; j <= i; j++) {
+
+                    //z value
+                    for(int k = 0; k <= j; k++){
+
+                    //making object
+                    GameObject stones = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    stones.transform.position = new Vector3(shiftX, shiftY, shiftZ);
+
+                    shiftZ--;
+                    }
+                
+                shiftX--;
+                }
+
+            shiftY--;
+        }
+        
             
-            //moving down
-            shiftZ--;
-            }
 
 
    }
